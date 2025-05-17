@@ -1,0 +1,12 @@
+services:
+  gtl_intl:
+    container_name: gtl-intl
+    image: ggsheet/gtl-intl:1.0.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    env_file:
+      - .env
+    ports: 
+      - "8080:8080"
