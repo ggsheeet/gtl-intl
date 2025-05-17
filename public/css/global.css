@@ -94,6 +94,7 @@
 	--clr-cta-text-alt: #130E09;
 	--clr-footer: #e1e1e1;
 	--clr-shadow: #888;
+	--clr-w-shadow: rgba(0, 0, 0, 0.2);
 	--clr-link: #2765d0;
 	--clr-error: #f1163e;
 	--curved: 100rem;
@@ -135,6 +136,7 @@
 		--clr-text-neg: #20202a;
 		--clr-footer: #1d1d24;
 		--clr-shadow: #2c2c3a;
+		--clr-w-shadow: rgba(255, 255, 255, 0.15);
 		--clr-link: #82a8ee;
 		--clr-error: #ff5070;
 	}

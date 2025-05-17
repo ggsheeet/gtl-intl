@@ -1688,13 +1688,13 @@ lottie-player {
 		height: 3.5rem;
 		background: linear-gradient(45deg, #25D366, #128C7E);
 		border-radius: var(--curved);
-		box-shadow: 0 0.25rem 0.75rem 0.063rem rgba(0, 0, 0, 0.2);
+		box-shadow: 0 0.125rem 0.5rem 0.063rem var(--clr-w-shadow);
 		pointer-events: auto;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 		&:hover {
 			transform: scale(1.02);
-			box-shadow: 0 0.125rem 1rem 0.063rem rgba(0, 0, 0, 0.25);
+			box-shadow: 0 0.125rem 0.75rem 0.063rem var(--clr-w-shadow);
 		}
 
 		.whatsapp_icon {
@@ -1714,7 +1714,7 @@ lottie-player {
 	
 			&:hover {
 				transform: scale(1);
-				box-shadow: 0 0.25rem 0.75rem 0.063rem rgba(0, 0, 0, 0.2);
+				box-shadow: 0 0.125rem 0.5rem 0.063rem var(--clr-w-shadow);
 			}
 	
 			.whatsapp_icon {
