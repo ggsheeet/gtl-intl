@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const navContainer = document.querySelector('.nav_container');
   const drawerToggle = document.getElementById('drawerToggle');
 	const drawerLink = document.querySelector('.drawer_link');
+	const whatsappContainer = document.querySelector('.whatsapp_container');
 
 	function getScrollbarWidth() {
 		return window.innerWidth - document.documentElement.clientWidth;
@@ -15,11 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
 			body.style.paddingRight = `${scrollbarWidth}px`;
 			navContainer.style.marginRight = `${scrollbarWidth}px`;
 			drawerLink.style.marginRight = `${scrollbarWidth}px`;
+			whatsappContainer.style.paddingRight = `calc(var(--container-padx) + ${scrollbarWidth}px)`;
 		} else {
 			body.style.overflow = '';
 			body.style.paddingRight = '';
 			navContainer.style.marginRight = '';
 			drawerLink.style.marginRight = '';
+			whatsappContainer.style.paddingRight = 'var(--container-padx)';
 			document.documentElement.style.overflow = '';
 			body.style.overflow = '';
 		}
@@ -123,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const languageSwitcher = document.getElementById('language-switcher');
+  const drawerLanguageSwitcher = document.getElementById('drawer-language-switcher');
   const currentLang = localStorage.getItem('language') || 'es';
 
   function updateLanguage(lang) {
@@ -132,9 +136,22 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.lang = lang;
     
     const newLang = lang === 'en' ? 'es' : 'en';
-    languageSwitcher.setAttribute('data-lang', newLang);
-    languageSwitcher.textContent = translations[newLang]['language.switch'];
+    const switchText = translations[newLang]['language.switch'];
     
+    // Update both language switchers
+    [languageSwitcher, drawerLanguageSwitcher].forEach(switcher => {
+      if (switcher) {
+        switcher.setAttribute('data-lang', newLang);
+        const textSpan = switcher.querySelector('span:not(.material-icons)');
+        if (textSpan) {
+          textSpan.textContent = switchText;
+        } else {
+          switcher.textContent = switchText;
+        }
+      }
+    });
+    
+    // Update all translatable elements
     document.querySelectorAll('[data-i18n]').forEach(element => {
       const key = element.getAttribute('data-i18n');
       if (translations[lang] && translations[lang][key]) {
@@ -157,9 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateLanguage(currentLang);
 
-  languageSwitcher.addEventListener('click', () => {
-    const newLang = languageSwitcher.getAttribute('data-lang');
-    updateLanguage(newLang);
+  // Add click handlers for both language switchers
+  [languageSwitcher, drawerLanguageSwitcher].forEach(switcher => {
+    if (switcher) {
+      switcher.addEventListener('click', () => {
+        const newLang = switcher.getAttribute('data-lang');
+        updateLanguage(newLang);
+      });
+    }
   });
 
   function handleNavigationClick(e) {
